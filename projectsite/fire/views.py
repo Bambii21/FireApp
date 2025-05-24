@@ -187,8 +187,17 @@ def map_station(request):
     fireStations = FireStation.objects.values('name', 'latitude', 'longitude')
 
     for fs in fireStations:
-        fs['latitude'] = float(fs['latitude'])
-        fs['longitude'] = float(fs['longitude'])
+        if fs['latitude'] is not None:
+            fs['latitude'] = float(fs['latitude'])
+
+        else:
+            fs['latitude'] = 0.0
+
+        if fs['longitude'] is not None:
+            fs['longitude'] = float(fs['longitude'])
+
+        else:
+            fs['longitude'] = 0.0
     
     fireStations_list = list(fireStations)
 
